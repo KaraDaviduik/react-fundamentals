@@ -1,29 +1,108 @@
 <!-- Intro to raw React APIs -->
 <!-- http://localhost:3000/isolated/exercise/02.html -->
 
-<body>
-  <div id="root"></div>
-
-  <!-- 🐨 add React and ReactDOM on the page.
+ <!-- 🐨 add React and ReactDOM on the page.
        💰 Here are script tags that'll do the job:
   <script src="https://unpkg.com/react@17.0.0/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@17.0.0/umd/react-dom.development.js"></script>
-  -->
-
-  <script type="module">
-    const rootElement = document.getElementById('root')
-
-    // You're going to re-implement this code using React!
+   // You're going to re-implement this code using React!
     // 💣 So go ahead and delete this implementation (or comment it out for now)
     // These three lines are similar to React.createElement
-    const element = document.createElement('div')
-    element.textContent = 'Hello World' // 💰 in React, you set this with the "children" prop
-    element.className = 'container' // 💰 in React, this is also called the "className" prop
-    // This is similar to ReactDOM.render
-    rootElement.append(element)
+    // const element = document.createElement('div')
+    // element.textContent = 'Hello World' // 💰 in React, you set this with the "children" prop
+    // element.className = 'container' // 💰 in React, this is also called the "className" prop
+    // // This is similar to ReactDOM.render
+    // rootElement.append(element)
 
     // 🐨 Please re-implement the regular document.createElement code above
     // with these React API calls
     // 💰 The example in the markdown file should be a good hint for you.
+  -->
+ 
+
+
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@17.0.0/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.0/umd/react-dom.development.js"></script>
+  
+  <script type="module">
+    /* 
+    <div class="container">
+      <span>Hello</span>
+      <span>World</span>
+    </div>
+    */
+    const rootElement = document.getElementById('root');
+
+    // All work
+    const helloElement = React.createElement('span', {children: 'Hello'});
+    const helloElement2 = React.createElement('span', null, 'Hello');
+    const helloElement3 = React.createElement('span', {}, 'Hello');
+
+    const worldElement = React.createElement('span', {children: 'World'});
+
+    const reactElement = React.createElement(
+      'div', 
+      {className: 'container'}, 
+      helloElement, // Can provide any number of additional arguments, they go into children prop array
+      ' ',
+      worldElement,
+      );  
+
+     // Either one works
+    const reactElement2 = React.createElement(
+    'div', 
+    {className: 'container', children: [helloElement, ' ', worldElement]}, 
+    ); 
+   
+    
+    ReactDOM.render(reactElement, rootElement);
+
   </script>
 </body>
+
+<!--
+SOLUTION
+
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@17.0.0/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.0/umd/react-dom.development.js"></script>
+  
+  <script type="module">
+    const rootElement = document.getElementById('root');
+
+    const reactElement = React.createElement('div', {
+      className: 'container', 
+      children: 'Hello World', // Use children instead of textContent
+    });
+    
+    // console.log(reactElement);
+    
+    ReactDOM.render(reactElement, rootElement);
+
+  </script>
+</body>
+-->
+
+<!--
+ MY FIRST TRY 
+
+<body>
+  <script src="https://unpkg.com/react@17.0.0/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.0/umd/react-dom.development.js"></script>
+  <div id="root"></div>
+
+  <script type="module">
+    const rootElement = document.getElementById('root');
+    const elementProps = {className: 'container', children: 'Hello World'}
+    const reactElement = React.createElement(
+      'div',
+      elementProps);
+    ReactDOM.render(reactElement, rootElement);
+  </script>
+</body>
+-->
